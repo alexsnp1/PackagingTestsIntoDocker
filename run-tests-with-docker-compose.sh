@@ -19,8 +19,6 @@ echo ">>> Запуск API-тестов"
 docker run --rm \
     --network nbank-network \
     -e APIBASEURL=http://backend:4111 \
-    -e UIBASEURL=http://nginx \
-    -e SELENOID_URL=http://selenoid:4444 \
     alexsnp1/nbank-tests:latest
 
 echo ">>> Запуск UI-тестов"
