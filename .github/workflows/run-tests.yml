@@ -1,0 +1,33 @@
+name: Run tests
+
+#триггер
+on: [ push, workflow_dispatch ]
+
+jobs: #аналог этапов
+  run-tests:
+    name: Set up services (review apps) and run tests
+    runs-on: ubuntu-latest
+    steps: # шаги конкретной джобы
+      - name: Checkout repository # копируем файлы репозитория внутрь CI раннера (агента)
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      #кешируем все что хранится в мавен репозитории. Если обновляется pom
+      # - будет обновлен и хеш и закешируется заново
+      - name: Cache Maven repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os}}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys:  |
+            ${{ runner.os }}-maven-
+
+      - name: Set up services
+        run: bash infra/docker_compose/restart_docker.sh
+
+      - name: Run tests
+        run: ./mvnw clean test
