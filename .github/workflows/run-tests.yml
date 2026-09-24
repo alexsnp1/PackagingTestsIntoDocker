@@ -33,9 +33,30 @@ jobs: #аналог этапов
 
       - name: Set up services
         run: bash infra/docker_compose/restart_docker.sh
+      - name: Test browser image
+        run: |
+          docker run -d \
+            --name test-chrome \
+            --network nbank-network \
+            sskorol/selenoid_chromium_vnc:100.0
+          
+           sleep 10
+          
+          echo "===== CONTAINER ====="
+          docker ps -a
+
+          echo "===== LOGS ====="
+          docker logs test-chrome
+          
+          echo "===== INSPECT ====="
+          docker inspect test-chrome
+          
+          docker rm -f test-chrome || true
+          
 
       - name: Run tests
         run: ./mvnw clean test
+
       - name: Docker diagnostics
         if: always()
         run: |
