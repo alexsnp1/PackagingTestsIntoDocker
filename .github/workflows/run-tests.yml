@@ -38,5 +38,13 @@ jobs: # аналог этапов
       - name: Build and test
         run: ./mvnw clean verify
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build Docker image
         run: docker build -t alexsnp1/packagingtestsintodocker:${{ github.sha }} .
+      - name: Push Docker image
+        run: docker push alexsnp1/packagingtestintodocker:${{ github.sha }}
