@@ -37,24 +37,31 @@ jobs: #аналог этапов
 
       - name: Set up services
         run: bash infra/docker_compose/restart_docker.sh
+
       - name: Test browser image
         run: |
           docker run -d \
             --name test-chrome \
             --network nbank-network \
             sskorol/selenoid_chromium_vnc:100.0
-          
-           sleep 10
-          
+
+          sleep 10
+
           echo "===== CONTAINER ====="
           docker ps -a
 
           echo "===== LOGS ====="
-          docker logs test-chrome
-          
+          docker logs test-chrome || true
+
           echo "===== INSPECT ====="
           docker inspect test-chrome
-          
+
+          echo "===== BROWSER PORT ====="
+          docker run --rm \
+            --network nbank-network \
+            curlimages/curl:latest \
+            curl -v --max-time 5 http://test-chrome:4444/ || true
+
           docker rm -f test-chrome || true
           
 
