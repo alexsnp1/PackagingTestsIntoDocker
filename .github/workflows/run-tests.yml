@@ -25,9 +25,13 @@ jobs: #аналог этапов
           key: ${{ runner.os}}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys:  |
             ${{ runner.os }}-maven-
+
       - name: Docker info
         run: |
+          echo "===== DOCKER VERSION ====="
           docker version
+
+          echo "===== DOCKER INFO ====="
           docker info
 
 
@@ -62,9 +66,12 @@ jobs: #аналог этапов
         run: |
           echo "===== DOCKER PS ====="
           docker ps -a
-           echo "===== COMPOSE PS ====="
+          
+          echo "===== COMPOSE PS ====="
           docker compose -f infra/docker_compose/docker-compose.yml ps
+          
           echo "===== SELENOID LOGS ====="
-          docker compose -f infra/docker_compose/docker-compose.yml logs selenoid
+          docker compose -f infra/docker_compose/docker-compose.yml logs selenoid || true
+          
           echo "===== NETWORK ====="
-          docker network inspect nbank-network
+          docker network inspect nbank-network || true
