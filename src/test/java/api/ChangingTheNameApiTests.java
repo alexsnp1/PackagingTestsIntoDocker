@@ -66,6 +66,7 @@ public class ChangingTheNameApiTests extends BaseTest {
         CustomerProfileGetResponse customerProfileGetResponseOld =
                 CustomerProfileStep.getCustomerProfileResponse(authTokenUser);
 
+
         CustomerProfileUpdateRequest customerProfileUpdateRequest = CustomerProfileUpdateRequest
                 .builder().name(null).build();
         new CrudRequester(RequestSpecs.userAuthSpec(authTokenUser),
