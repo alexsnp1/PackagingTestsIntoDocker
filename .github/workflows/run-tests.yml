@@ -39,9 +39,10 @@ jobs: #аналог этапов
         run: |
           docker version
           docker info
-          docker compose ps
           docker ps -a
-          docker compose logs selenoid
+          docker network ls
+          docker compose -f infra/docker_compose/docker-compose.yml ps
+          docker compose -f infra/docker_compose/docker-compose.yml logs selenoid
 
       - name: Run tests
         run: ./mvnw clean test
