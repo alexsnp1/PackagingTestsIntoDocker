@@ -48,3 +48,4 @@ jobs: # аналог этапов
         run: docker build -t alexsnp1/packagingtestsintodocker:${{ github.sha }} .
       - name: Push Docker image
         run: docker push alexsnp1/packagingtestintodocker:${{ github.sha }}
+
