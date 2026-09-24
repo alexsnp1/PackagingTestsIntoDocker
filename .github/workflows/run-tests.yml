@@ -35,5 +35,8 @@ jobs: # аналог этапов
       - name: Set up services
         run: bash infra/docker_compose/restart_docker.sh
 
-      - name: Run tests
+      - name: Build and test
         run: ./mvnw clean verify
+
+      - name: Build Docker image
+        run: docker build -t alexsnp1/PackagingTestsIntoDocker:${{ github.sha }} .
