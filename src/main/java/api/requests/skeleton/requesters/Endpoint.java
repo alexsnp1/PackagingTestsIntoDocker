@@ -1,6 +1,20 @@
 package api.requests.skeleton.requesters;
 
-import api.models.*;
+
+import api.models.AdminCreateUserRequest;
+import api.models.AdminCreateUserResponse;
+import api.models.BaseModel;
+import api.models.CustomerAccountsGetResponse;
+import api.models.CustomerProfileGetResponse;
+import api.models.CustomerProfileUpdateRequest;
+import api.models.CustomerProfileUpdateResponse;
+import api.models.DepositFundsRequest;
+import api.models.DepositFundsResponse;
+import api.models.TransferFundsRequest;
+import api.models.TransferFundsResponse;
+import api.models.UserCreateAccountResponse;
+import api.models.UserLoginRequest;
+import api.models.UserLoginResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

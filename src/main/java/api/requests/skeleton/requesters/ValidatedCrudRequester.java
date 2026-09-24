@@ -9,11 +9,11 @@ import io.restassured.specification.ResponseSpecification;
 public class ValidatedCrudRequester<T> extends HttpRequest implements CrudEndpointInterface {
     private CrudRequester crudRequester;
 
-    public ValidatedCrudRequester(RequestSpecification requestSpecification, Endpoint endpoint, ResponseSpecification responseSpecification) {
+    public ValidatedCrudRequester(RequestSpecification requestSpecification, Endpoint endpoint,
+                                  ResponseSpecification responseSpecification) {
         super(requestSpecification, endpoint, responseSpecification);
         this.crudRequester = new CrudRequester(requestSpecification, endpoint, responseSpecification);
     }
-
 
     @Override
     public T post(BaseModel model) {

@@ -10,7 +10,7 @@ public class DashboardPage extends BasePage<DashboardPage> {
     private SelenideElement depositMoneyButton = $(Selectors.byText("💰 Deposit Money"));
     private SelenideElement makeATransferButton = $(Selectors.byText("🔄 Make a Transfer"));
     private SelenideElement profileHeaderButton = $(".profile-header");
-    private SelenideElement UserDashboardText = $(Selectors.byText("User Dashboard"));
+    private SelenideElement userDashboard = $(Selectors.byText("User Dashboard"));
 
     @Override
     public String url() {
@@ -33,7 +33,7 @@ public class DashboardPage extends BasePage<DashboardPage> {
     }
 
     public DashboardPage checkUserDashboardTextIsVisible() {
-        UserDashboardText.shouldBe(Condition.visible);
+        userDashboard.shouldBe(Condition.visible);
         return this;
     }
 

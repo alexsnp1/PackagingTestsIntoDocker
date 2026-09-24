@@ -9,7 +9,8 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class TransferPage extends BasePage<TransferPage> {
     private SelenideElement recepientNameInput = $(Selectors.byAttribute("placeholder", "Enter recipient name"));
-    private SelenideElement recepientAccountNumberInput = $(Selectors.byAttribute("placeholder", "Enter recipient account number"));
+    private SelenideElement recepientAccountNumberInput = $(Selectors.byAttribute("placeholder",
+            "Enter recipient account number"));
     private SelenideElement amountInput = $(Selectors.byAttribute("placeholder", "Enter amount"));
     private SelenideElement confirmationCheckbox = $(Selectors.byId("confirmCheck"));
     private SelenideElement sendTransferButton = $x("//button[contains(text(), '\uD83D\uDE80 Send Transfer')]");
@@ -27,6 +28,7 @@ public class TransferPage extends BasePage<TransferPage> {
         confirmationCheckbox.click();
         return this;
     }
+
     public TransferPage pressTransferButton() {
         sendTransferButton
                 .shouldBe(Condition.visible)

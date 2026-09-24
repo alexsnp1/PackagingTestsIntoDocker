@@ -2,7 +2,6 @@ package api.configs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
 import java.util.Properties;
 
 public class Config {
@@ -23,14 +22,14 @@ public class Config {
     public static String getProperty(String key) {
         //ПРИОРИТЕТ 1 - это системное свойство baseApiUrl = ..
         String systemValue = System.getProperty(key);
-        if (systemValue!=null) {
+        if (systemValue != null) {
             return systemValue;
         }
         //ПРИОРИТЕТ 2 - это переменная окружения baseApiUrl - BASEAPIURL
         //admin.username -> ADMIN_USERNAME
         String envKey = key.toUpperCase().replace('.', '_');
         String envValue = System.getenv(envKey);
-        if (envValue!=null) {
+        if (envValue != null) {
             return envValue;
         }
         //ПРИОРИТЕТ 3 - это config.properties

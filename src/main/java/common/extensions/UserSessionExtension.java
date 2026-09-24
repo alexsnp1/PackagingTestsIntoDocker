@@ -8,7 +8,12 @@ import api.requests.steps.UserCreationStep;
 import common.annotations.UserSession;
 import common.data.UserSessionData;
 import common.data.UserSessions;
-import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.ExtensionConfigurationException;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.api.extension.ParameterResolutionException;
+import org.junit.jupiter.api.extension.ParameterResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +51,7 @@ public class UserSessionExtension implements BeforeEachCallback, ParameterResolv
 
         authAsUser(users.get(authUserIndex).getAuthToken());
     }
+
     private UserSession getUserSessionAnnotation(ExtensionContext context) {
 
         UserSession annotation = context.getTestMethod()
@@ -59,9 +65,11 @@ public class UserSessionExtension implements BeforeEachCallback, ParameterResolv
         }
         return annotation;
     }
+
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-        return parameterContext.getParameter().getType().equals(UserSessionData.class) || parameterContext.getParameter().getType().equals(UserSessions.class);
+        return parameterContext.getParameter().getType().equals(UserSessionData.class)
+                || parameterContext.getParameter().getType().equals(UserSessions.class);
     }
 
     @Override

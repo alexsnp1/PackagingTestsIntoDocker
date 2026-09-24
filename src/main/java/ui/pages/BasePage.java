@@ -11,7 +11,10 @@ import org.openqa.selenium.Alert;
 import java.time.Duration;
 import java.util.Arrays;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.switchTo;
+
 
 public abstract class BasePage<T extends BasePage> {
     private SelenideElement accountDropDown = $("select.account-selector");
