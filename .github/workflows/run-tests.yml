@@ -34,15 +34,16 @@ jobs: #аналог этапов
       - name: Set up services
         run: bash infra/docker_compose/restart_docker.sh
 
+      - name: Run tests
+        run: ./mvnw clean test
       - name: Docker diagnostics
         if: always()
         run: |
-          docker version
-          docker info
+          echo "===== DOCKER PS ====="
           docker ps -a
-          docker network ls
+           echo "===== COMPOSE PS ====="
           docker compose -f infra/docker_compose/docker-compose.yml ps
+          echo "===== SELENOID LOGS ====="
           docker compose -f infra/docker_compose/docker-compose.yml logs selenoid
-
-      - name: Run tests
-        run: ./mvnw clean test
+          echo "===== NETWORK ====="
+          docker network inspect nbank-network
